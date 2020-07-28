@@ -20,8 +20,11 @@ import logging
 import time
 import argparse
 import json
+import random
 
 AllowedActions = ['both', 'publish', 'subscribe']
+
+
 
 # Custom MQTT message callback
 def customCallback(client, userdata, message):
@@ -114,8 +117,16 @@ time.sleep(2)
 loopCount = 0
 while True:
     if args.mode == 'both' or args.mode == 'publish':
-        message = {}
-        message['message'] = args.message
+        message = {
+            "clientId": args.clientId,
+            "timestamp": int(time.time()),
+            "isOccupied":random.sample([True,False],1)[0],
+            "number": 4,
+            "meter" :{
+                "location":["","-130.5355"],
+                "address": "9XYZ    AB"
+            }
+        }
         message['sequence'] = loopCount
         messageJson = json.dumps(message)
         myAWSIoTMQTTClient.publish(topic, messageJson, 1)
