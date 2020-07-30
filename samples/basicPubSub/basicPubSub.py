@@ -21,6 +21,7 @@ import time
 import argparse
 import json
 import random
+import os
 
 AllowedActions = ['both', 'publish', 'subscribe']
 
@@ -51,6 +52,10 @@ parser.add_argument("-t", "--topic", action="store", dest="topic", default="PD/o
 parser.add_argument("-m", "--mode", action="store", dest="mode", default="both",
                     help="Operation modes: %s"%str(AllowedActions))
 parser.add_argument("-M", "--message", action="store", dest="message", default="Hello World!",
+                    help="Message to publish")
+parser.add_argument("-a", "--address", action="store", dest="Address", default="2XYZ   AB",
+                    help="Message to publish")
+parser.add_argument("-l", "--latitude", action="store", dest="Latitude", default="-130.5355",
                     help="Message to publish")
 
 args = parser.parse_args()
@@ -123,8 +128,8 @@ while True:
             "isOccupied":random.sample([True,False],1)[0],
             "number": 4,
             "meter" :{
-                "location":["","-130.5355"],
-                "address": "9XYZ    AB"
+                "location":["",args.Latitude],
+                "address": args.Address
             }
         }
         message['sequence'] = loopCount
@@ -133,4 +138,4 @@ while True:
         if args.mode == 'publish':
             print('Published topic %s: %s\n' % (topic, messageJson))
         loopCount += 1
-    time.sleep(10)
+    time.sleep(30)
