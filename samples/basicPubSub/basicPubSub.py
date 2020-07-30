@@ -55,9 +55,10 @@ parser.add_argument("-M", "--message", action="store", dest="message", default="
                     help="Message to publish")
 parser.add_argument("-a", "--address", action="store", dest="Address", default="2XYZ   AB",
                     help="Message to publish")
-parser.add_argument("-l", "--latitude", action="store", dest="Latitude", default="-130.5355",
+parser.add_argument("-la", "--latitude", action="store", dest="Latitude", default="-130.5355",
                     help="Message to publish")
-
+parser.add_argument("-lo", "--longtitude", action="store", dest="Longtitude", default="-75.5712",
+                    help="Message to publish")
 args = parser.parse_args()
 host = args.host
 rootCAPath = args.rootCAPath
@@ -128,7 +129,7 @@ while True:
             "isOccupied":random.sample([True,False],1)[0],
             "number": 4,
             "meter" :{
-                "location":["",args.Latitude],
+                "location":[args.Longtitude,args.Latitude],
                 "address": args.Address
             }
         }
