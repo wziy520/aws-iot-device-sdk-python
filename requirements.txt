@@ -16,7 +16,7 @@ Jinja2==2.11.1
 lazy-object-proxy==1.4.3
 MarkupSafe==1.1.1
 mccabe==0.6.1
-numpy==1.18.3
+numpy==1.22.0
 protobuf==3.7.1
 PyHamcrest==2.0.2
 pylint==2.5.3
